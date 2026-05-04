@@ -3,754 +3,919 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Origin — Connecting the Next Billion</title>
-  <meta name="description" content="the origin builds infrastructure and social technology for the next generation of human connection." />
+  <title>ORIGIN — Connecting the Next Billion</title>
+
+  <meta
+    name="description"
+    content="ORIGIN builds infrastructure and social technology for the next generation of human connection."
+  />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
   <style>
+
     :root {
       --black: #020408;
       --white: #F4F2EE;
-      --accent: #FF4D1C;
-      --accent2: #0057FF;
-      --mid: #1A1E2E;
+      --accent: #ffffff;
+      --accent2: #8b8b8b;
+      --mid: #111111;
       --muted: #6B7280;
-      --border: rgba(244,242,238,0.08);
+      --border: rgba(255,255,255,0.08);
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       background: var(--black);
       color: var(--white);
       font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
       overflow-x: hidden;
-      cursor: none;
     }
 
-    /* Custom cursor */
-    .cursor {
-      position: fixed; top: 0; left: 0; z-index: 9999;
-      pointer-events: none; mix-blend-mode: difference;
-    }
-    .cursor-dot {
-      width: 8px; height: 8px; background: var(--white);
-      border-radius: 50%; position: absolute;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s;
-    }
-    .cursor-ring {
-      width: 40px; height: 40px; border: 1px solid var(--white);
-      border-radius: 50%; position: absolute;
-      transform: translate(-50%, -50%);
-      transition: all 0.15s ease-out;
+    img {
+      max-width: 100%;
+      display: block;
     }
 
-    /* NAV */
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* NAVBAR */
+
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 24px 48px;
-      display: flex; align-items: center; justify-content: space-between;
-      border-bottom: 1px solid transparent;
-      transition: all 0.4s;
-    }
-    nav.scrolled {
-      background: rgba(2,4,8,0.85);
-      backdrop-filter: blur(20px);
-      border-color: var(--border);
-    }
-    .logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: 22px;
-      letter-spacing: -0.5px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .logo-mark {
-      width: 32px; height: 32px;
-      background: var(--accent);
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      animation: spin-slow 12s linear infinite;
-    }
-    @keyframes spin-slow { to { transform: rotate(360deg); } }
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
 
-    .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a {
-      color: var(--white); text-decoration: none;
-      font-size: 14px; letter-spacing: 0.02em;
-      opacity: 0.65; transition: opacity 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 20px 48px;
+
+      backdrop-filter: blur(18px);
+      background: rgba(0,0,0,0.4);
+
+      border-bottom: 1px solid var(--border);
     }
-    .nav-links a:hover { opacity: 1; }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: -1px;
+    }
+
+    .logo img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      opacity: 0.7;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+    }
 
     .nav-cta {
-      background: var(--white); color: var(--black);
-      padding: 10px 22px; font-size: 14px; font-weight: 400;
-      border: none; letter-spacing: 0.02em;
-      cursor: none; transition: all 0.2s;
-      font-family: 'DM Sans', sans-serif;
+      background: white;
+      color: black;
+
+      border: none;
+
+      padding: 12px 22px;
+
+      font-weight: 700;
+
+      border-radius: 50px;
+
+      cursor: pointer;
+
+      transition: 0.3s;
     }
-    .nav-cta:hover { background: var(--accent); color: var(--white); }
+
+    .nav-cta:hover {
+      transform: scale(1.05);
+    }
+
+    /* MOBILE MENU */
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      width: 24px;
+      height: 2px;
+      background: white;
+    }
 
     /* HERO */
+
     .hero {
       min-height: 100vh;
-      display: flex; flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 48px 80px;
-      position: relative; overflow: hidden;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding: 140px 48px 80px;
+
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero-grid {
-      position: absolute; inset: 0;
+    .hero::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
       background-image:
         linear-gradient(var(--border) 1px, transparent 1px),
         linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 80px 80px;
-      animation: grid-fade 3s ease forwards;
-    }
-    @keyframes grid-fade { from { opacity: 0; } to { opacity: 1; } }
 
-    .hero-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(120px);
-      pointer-events: none;
+      background-size: 70px 70px;
+
+      opacity: 0.25;
     }
-    .orb-1 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(255,77,28,0.25), transparent 70%);
-      top: -100px; right: -100px;
-      animation: orb-float 8s ease-in-out infinite;
-    }
-    .orb-2 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(0,87,255,0.2), transparent 70%);
-      bottom: 100px; left: 10%;
-      animation: orb-float 10s ease-in-out infinite reverse;
-    }
-    @keyframes orb-float {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-40px) scale(1.05); }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
     }
 
     .hero-eyebrow {
-      font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 32px;
-      opacity: 0; animation: slide-up 0.8s 0.3s forwards;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-size: 12px;
+
+      color: var(--accent2);
+
+      margin-bottom: 28px;
     }
 
     .hero-title {
       font-family: 'Syne', sans-serif;
+      font-size: clamp(50px, 9vw, 120px);
+      line-height: 0.95;
       font-weight: 800;
-      font-size: clamp(56px, 8vw, 128px);
-      line-height: 0.92;
-      letter-spacing: -0.03em;
-      max-width: 900px;
-      opacity: 0; animation: slide-up 0.8s 0.5s forwards;
+      letter-spacing: -3px;
+
+      max-width: 950px;
     }
+
     .hero-title em {
-      font-style: normal;
-      -webkit-text-stroke: 1px var(--white);
       color: transparent;
+      -webkit-text-stroke: 1px white;
+      font-style: normal;
     }
 
     .hero-bottom {
-      display: flex; align-items: flex-end;
+      margin-top: 50px;
+
+      display: flex;
       justify-content: space-between;
-      margin-top: 64px;
-      opacity: 0; animation: slide-up 0.8s 0.8s forwards;
+      align-items: flex-end;
+      gap: 40px;
+
+      flex-wrap: wrap;
     }
+
     .hero-sub {
-      font-size: 18px; line-height: 1.6; max-width: 420px;
-      opacity: 0.6;
+      max-width: 520px;
+      font-size: 18px;
+      line-height: 1.7;
+      opacity: 0.7;
     }
-    .hero-actions { display: flex; gap: 16px; align-items: center; }
-    .btn-primary {
-      background: var(--accent);
-      color: var(--white);
-      padding: 16px 36px;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700; font-size: 15px;
-      border: none; letter-spacing: 0.02em;
-      cursor: none; transition: all 0.2s;
-      position: relative; overflow: hidden;
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
     }
-    .btn-primary::after {
-      content: ''; position: absolute;
-      inset: 0; background: rgba(255,255,255,0.1);
-      transform: translateX(-100%); transition: transform 0.3s;
-    }
-    .btn-primary:hover::after { transform: translateX(0); }
+
+    .btn-primary,
     .btn-ghost {
-      background: transparent; color: var(--white);
-      padding: 16px 36px; font-family: 'Syne', sans-serif;
-      font-weight: 600; font-size: 15px;
-      border: 1px solid var(--border);
-      cursor: none; transition: all 0.2s;
-      letter-spacing: 0.02em;
-    }
-    .btn-ghost:hover { border-color: var(--white); }
+      padding: 16px 32px;
+      border-radius: 60px;
 
-    @keyframes slide-up {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      font-weight: 700;
+
+      border: none;
+
+      cursor: pointer;
+
+      transition: 0.3s;
     }
 
-    /* TICKER */
-    .ticker {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 0; overflow: hidden;
-      background: var(--mid);
+    .btn-primary {
+      background: white;
+      color: black;
     }
-    .ticker-inner {
-      display: flex; gap: 80px; width: max-content;
-      animation: ticker 30s linear infinite;
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
     }
-    @keyframes ticker { to { transform: translateX(-50%); } }
-    .ticker-item {
-      font-family: 'Syne', sans-serif; font-size: 13px;
-      font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; white-space: nowrap;
-      opacity: 0.5;
-      display: flex; gap: 24px; align-items: center;
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
     }
-    .ticker-item span { color: var(--accent); }
+
+    .btn-ghost:hover {
+      border-color: white;
+    }
 
     /* STATS */
+
     .stats {
-      padding: 120px 48px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
+
       gap: 1px;
+
       background: var(--border);
     }
+
     .stat {
-      background: var(--black);
-      padding: 48px 40px;
+      background: black;
+      padding: 50px 40px;
     }
+
     .stat-num {
       font-family: 'Syne', sans-serif;
+      font-size: clamp(42px, 6vw, 72px);
       font-weight: 800;
-      font-size: clamp(40px, 5vw, 72px);
-      letter-spacing: -0.03em;
-      line-height: 1;
     }
-    .stat-num .accent { color: var(--accent); }
+
     .stat-label {
-      margin-top: 16px; font-size: 14px;
-      opacity: 0.5; letter-spacing: 0.05em;
+      margin-top: 12px;
+      opacity: 0.6;
+      font-size: 14px;
+    }
+
+    /* SECTION */
+
+    .section {
+      padding: 120px 48px;
+    }
+
+    .section-header {
+      margin-bottom: 60px;
+    }
+
+    .section-label {
       text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 12px;
+      opacity: 0.5;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -2px;
     }
 
     /* PRODUCTS */
-    .section { padding: 120px 48px; }
-    .section-header {
-      display: flex; justify-content: space-between;
-      align-items: flex-end; margin-bottom: 80px;
-    }
-    .section-label {
-      font-size: 11px; letter-spacing: 0.25em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 20px;
-    }
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: clamp(36px, 4vw, 64px);
-      letter-spacing: -0.03em; line-height: 1;
-    }
-    .section-link {
-      color: var(--white); text-decoration: none;
-      font-size: 14px; opacity: 0.5;
-      display: flex; align-items: center; gap: 8px;
-      transition: opacity 0.2s;
-    }
-    .section-link:hover { opacity: 1; }
 
     .products-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 2px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
     }
+
     .product-card {
       background: var(--mid);
-      padding: 48px;
-      position: relative; overflow: hidden;
-      transition: background 0.3s;
-    }
-    .product-card:hover { background: #1e2438; }
-    .product-card.featured {
-      grid-row: 1 / 3;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      min-height: 500px;
-    }
-    .product-card-bg {
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(255,77,28,0.08), transparent 60%);
-      opacity: 0; transition: opacity 0.3s;
-    }
-    .product-card:hover .product-card-bg { opacity: 1; }
+      border: 1px solid var(--border);
 
-    .product-icon {
-      width: 48px; height: 48px; margin-bottom: 32px;
-      display: flex; align-items: center; justify-content: center;
+      border-radius: 24px;
+
+      padding: 40px;
+
+      transition: 0.3s;
     }
-    .product-icon svg { width: 100%; height: 100%; }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,255,255,0.15);
+    }
+
     .product-name {
       font-family: 'Syne', sans-serif;
-      font-weight: 700; font-size: 24px;
-      letter-spacing: -0.02em; margin-bottom: 12px;
-    }
-    .product-desc {
-      font-size: 15px; line-height: 1.65;
-      opacity: 0.55; max-width: 320px;
-    }
-    .product-tag {
-      display: inline-block; margin-top: 24px;
-      font-size: 11px; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--accent);
-      border: 1px solid rgba(255,77,28,0.3);
-      padding: 6px 14px;
+      font-size: 28px;
+      font-weight: 700;
+
+      margin-bottom: 14px;
     }
 
-    /* ABOUT / MISSION */
-    .mission {
-      padding: 120px 48px;
-      background: var(--mid);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 120px; align-items: center;
+    .product-desc {
+      line-height: 1.7;
+      opacity: 0.7;
+      margin-bottom: 22px;
     }
-    .mission-text .section-label { margin-bottom: 24px; }
-    .mission-quote {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: clamp(28px, 3vw, 48px);
-      line-height: 1.15; letter-spacing: -0.02em;
+
+    .product-tag {
+      display: inline-block;
+
+      border: 1px solid rgba(255,255,255,0.12);
+
+      padding: 8px 14px;
+
+      border-radius: 30px;
+
+      font-size: 12px;
+
+      opacity: 0.7;
     }
-    .mission-quote em {
-      font-style: normal; color: var(--accent);
-    }
-    .mission-body {
-      margin-top: 40px; font-size: 16px;
-      line-height: 1.75; opacity: 0.6;
-    }
-    .mission-visual {
-      position: relative; aspect-ratio: 1;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .mission-rings {
-      position: relative; width: 300px; height: 300px;
-    }
-    .ring {
-      position: absolute; border-radius: 50%;
-      border: 1px solid;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-    }
-    .ring-1 { width: 100%; height: 100%; border-color: rgba(255,77,28,0.3); animation: rotate 20s linear infinite; }
-    .ring-2 { width: 70%; height: 70%; border-color: rgba(0,87,255,0.3); animation: rotate 15s linear infinite reverse; }
-    .ring-3 { width: 40%; height: 40%; border-color: rgba(244,242,238,0.2); animation: rotate 10s linear infinite; }
-    .ring-center {
-      position: absolute; width: 16px; height: 16px;
-      background: var(--accent); border-radius: 50%;
-      top: 50%; left: 50%; transform: translate(-50%, -50%);
-    }
-    @keyframes rotate { to { transform: translate(-50%, -50%) rotate(360deg); } }
 
     /* TEAM */
+
     .team-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
+      gap: 24px;
     }
+
     .team-card {
-      background: var(--mid); padding: 40px;
-      transition: background 0.3s;
+      background: var(--mid);
+      padding: 36px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
     }
-    .team-card:hover { background: #1e2438; }
+
     .team-avatar {
-      width: 56px; height: 56px; border-radius: 50%;
-      margin-bottom: 24px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: 20px;
+      width: 60px;
+      height: 60px;
+
+      border-radius: 50%;
+
+      background: rgba(255,255,255,0.08);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-weight: 800;
+      margin-bottom: 20px;
     }
+
     .team-name {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700; font-size: 20px;
+      font-size: 22px;
+      font-weight: 700;
       margin-bottom: 6px;
     }
-    .team-role { font-size: 13px; opacity: 0.5; text-transform: uppercase; letter-spacing: 0.08em; }
-    .team-bio { margin-top: 20px; font-size: 14px; line-height: 1.65; opacity: 0.55; }
 
-    /* CTA BANNER */
-    .cta-banner {
+    .team-role {
+      opacity: 0.5;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .team-bio {
+      line-height: 1.7;
+      opacity: 0.7;
+    }
+
+    /* CTA */
+
+    .cta {
       padding: 120px 48px;
-      background: var(--accent);
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center; gap: 80px;
+
+      text-align: center;
     }
-    .cta-banner .section-title { color: var(--black); }
-    .cta-banner .section-label { color: rgba(2,4,8,0.5); }
-    .btn-dark {
-      background: var(--black); color: var(--white);
-      padding: 18px 40px;
+
+    .cta-box {
+      background: white;
+      color: black;
+
+      border-radius: 40px;
+
+      padding: 70px 40px;
+    }
+
+    .cta-title {
       font-family: 'Syne', sans-serif;
-      font-weight: 700; font-size: 16px;
-      border: none; cursor: none;
-      transition: all 0.2s; white-space: nowrap;
-      letter-spacing: 0.02em;
+      font-size: clamp(34px, 6vw, 64px);
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 30px;
     }
-    .btn-dark:hover { background: var(--mid); }
 
     /* FOOTER */
+
     footer {
       padding: 80px 48px 40px;
       border-top: 1px solid var(--border);
     }
+
     .footer-top {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 80px; margin-bottom: 80px;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 60px;
     }
-    .footer-brand .logo { margin-bottom: 20px; }
-    .footer-desc { font-size: 14px; opacity: 0.45; line-height: 1.7; max-width: 280px; }
+
+    .footer-desc {
+      max-width: 320px;
+      line-height: 1.7;
+      opacity: 0.6;
+      margin-top: 20px;
+    }
+
     .footer-col h4 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700; font-size: 13px;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      margin-bottom: 24px; opacity: 0.5;
+      margin-bottom: 20px;
+      font-size: 14px;
+      opacity: 0.5;
     }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
     .footer-col a {
-      color: var(--white); text-decoration: none;
-      font-size: 14px; opacity: 0.6; transition: opacity 0.2s;
+      opacity: 0.7;
     }
-    .footer-col a:hover { opacity: 1; }
+
     .footer-bottom {
-      display: flex; justify-content: space-between;
-      padding-top: 40px; border-top: 1px solid var(--border);
-      font-size: 13px; opacity: 0.35;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+
+      opacity: 0.45;
+      font-size: 13px;
     }
 
     /* RESPONSIVE */
+
     @media (max-width: 1024px) {
-      nav { padding: 20px 24px; }
-      .hero { padding: 0 24px 60px; }
-      .hero-title { font-size: clamp(42px, 10vw, 80px); }
-      .hero-bottom { flex-direction: column; align-items: flex-start; gap: 40px; }
-      .stats { grid-template-columns: repeat(2, 1fr); padding: 80px 24px; }
-      .section { padding: 80px 24px; }
-      .products-grid { grid-template-columns: 1fr; }
-      .product-card.featured { grid-row: auto; min-height: 300px; }
-      .mission { grid-template-columns: 1fr; gap: 60px; padding: 80px 24px; }
-      .team-grid { grid-template-columns: 1fr; }
-      .cta-banner { grid-template-columns: 1fr; gap: 40px; padding: 80px 24px; }
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
-      .nav-links { display: none; }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+
     }
+
+    @media (max-width: 768px) {
+
+      nav {
+        padding: 16px;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+
+        flex-direction: column;
+
+        background: rgba(0,0,0,0.98);
+
+        padding: 24px;
+
+        display: none;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .hero {
+        padding: 120px 16px 60px;
+      }
+
+      .hero-title {
+        font-size: 46px;
+      }
+
+      .hero-sub {
+        font-size: 16px;
+      }
+
+      .hero-actions {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .btn-primary,
+      .btn-ghost {
+        width: 100%;
+      }
+
+      .section,
+      .cta,
+      footer {
+        padding: 70px 16px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+
+    }
+
   </style>
 </head>
+
 <body>
 
-  <!-- Cursor -->
-  <div class="cursor">
-    <div class="cursor-dot" id="dot"></div>
-    <div class="cursor-ring" id="ring"></div>
-  </div>
+  <!-- NAV -->
 
-  <!-- Nav -->
-  <nav id="nav">
+  <nav>
+
     <div class="logo">
-      <div class="logo-mark"></div>
-      NexusCore
+      <img src="origin-logo.png" alt="ORIGIN Logo">
+      <span>ORIGIN</span>
     </div>
-    <ul class="nav-links">
+
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
       <li><a href="#products">Products</a></li>
-      <li><a href="#about">About</a></li>
       <li><a href="#team">Team</a></li>
       <li><a href="#careers">Careers</a></li>
-      <li><a href="#investors">Investors</a></li>
+      <li><a href="#about">About</a></li>
     </ul>
+
     <button class="nav-cta">Join Waitlist</button>
+
   </nav>
 
-  <!-- Hero -->
+  <!-- HERO -->
+
   <section class="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-orb orb-1"></div>
-    <div class="hero-orb orb-2"></div>
-    <p class="hero-eyebrow">Est. 2026 · Building the Future</p>
-    <h1 class="hero-title">Connecting the <em>Next</em> Billion Minds</h1>
-    <div class="hero-bottom">
-      <p class="hero-sub">The Origin builds social infrastructure and AI-native platforms that scale to every human on Earth — starting today.</p>
-      <div class="hero-actions">
-        <button class="btn-primary">Get Early Access</button>
-        <button class="btn-ghost">Read our Manifesto</button>
+
+    <div class="hero-content">
+
+      <p class="hero-eyebrow">
+        EST. 2026 · BUILDING THE FUTURE
+      </p>
+
+      <h1 class="hero-title">
+        Connecting the <em>Next</em> Billion Minds
+      </h1>
+
+      <div class="hero-bottom">
+
+        <p class="hero-sub">
+          ORIGIN builds social infrastructure and AI-native platforms that scale to every human on Earth — starting today.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn-primary">
+            Get Early Access
+          </button>
+
+          <button class="btn-ghost">
+            Read Manifesto
+          </button>
+        </div>
+
       </div>
+
     </div>
+
   </section>
 
-  <!-- Ticker -->
-  <div class="ticker">
-    <div class="ticker-inner">
-      <div class="ticker-item">Social Platform <span>●</span></div>
-      <div class="ticker-item">AI Infrastructure <span>●</span></div>
-      <div class="ticker-item">Cloud Services <span>●</span></div>
-      <div class="ticker-item">Developer Tools <span>●</span></div>
-      <div class="ticker-item">Global Scale <span>●</span></div>
-      <div class="ticker-item">1B+ Users Target <span>●</span></div>
-      <div class="ticker-item">Open Source Core <span>●</span></div>
-      <div class="ticker-item">Privacy First <span>●</span></div>
-      <!-- Duplicate for seamless loop -->
-      <div class="ticker-item">Social Platform <span>●</span></div>
-      <div class="ticker-item">AI Infrastructure <span>●</span></div>
-      <div class="ticker-item">Cloud Services <span>●</span></div>
-      <div class="ticker-item">Developer Tools <span>●</span></div>
-      <div class="ticker-item">Global Scale <span>●</span></div>
-      <div class="ticker-item">1B+ Users Target <span>●</span></div>
-      <div class="ticker-item">Open Source Core <span>●</span></div>
-      <div class="ticker-item">Privacy First <span>●</span></div>
-    </div>
-  </div>
+  <!-- STATS -->
 
-  <!-- Stats -->
-  <div class="stats">
+  <section class="stats">
+
     <div class="stat">
-      <div class="stat-num">1<span class="accent">B+</span></div>
+      <div class="stat-num">1B+</div>
       <div class="stat-label">Users we're building for</div>
     </div>
-    <div class="stat">
-      <div class="stat-num">&lt;20<span class="accent">ms</span></div>
-      <div class="stat-label">Target p99 latency</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">99<span class="accent">.99%</span></div>
-      <div class="stat-label">Uptime SLO target</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">6<span class="accent">+</span></div>
-      <div class="stat-label">Global regions at launch</div>
-    </div>
-  </div>
 
-  <!-- Products -->
+    <div class="stat">
+      <div class="stat-num">20ms</div>
+      <div class="stat-label">Target latency</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-num">99.99%</div>
+      <div class="stat-label">Infrastructure uptime</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-num">6+</div>
+      <div class="stat-label">Global regions</div>
+    </div>
+
+  </section>
+
+  <!-- PRODUCTS -->
+
   <section class="section" id="products">
+
     <div class="section-header">
-      <div>
-        <p class="section-label">Our Products</p>
-        <h2 class="section-title">Built for Scale,<br/>Designed for People</h2>
-      </div>
-      <a href="#" class="section-link">View all products →</a>
+      <p class="section-label">Products</p>
+
+      <h2 class="section-title">
+        Built for Scale,<br>
+        Designed for Humans
+      </h2>
     </div>
+
     <div class="products-grid">
-      <div class="product-card featured">
-        <div class="product-card-bg"></div>
-        <div class="product-icon">
-          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="24" cy="24" r="20" stroke="#FF4D1C" stroke-width="1.5"/>
-            <circle cx="24" cy="24" r="8" fill="#FF4D1C" opacity="0.3"/>
-            <circle cx="24" cy="24" r="3" fill="#FF4D1C"/>
-            <line x1="24" y1="4" x2="24" y2="16" stroke="#FF4D1C" stroke-width="1.5"/>
-            <line x1="24" y1="32" x2="24" y2="44" stroke="#FF4D1C" stroke-width="1.5"/>
-            <line x1="4" y1="24" x2="16" y2="24" stroke="#FF4D1C" stroke-width="1.5"/>
-            <line x1="32" y1="24" x2="44" y2="24" stroke="#FF4D1C" stroke-width="1.5"/>
-          </svg>
-        </div>
+
+      <div class="product-card">
         <h3 class="product-name">OChat</h3>
-        <p class="product-desc">The next-generation social platform built with AI at its core. Real-time feeds, end-to-end encrypted messaging, and communities — all running on distributed infrastructure that never sleeps.</p>
-        <span class="product-tag">Flagship · In Development</span>
+
+        <p class="product-desc">
+          AI-native social communication platform built for real-time global interaction.
+        </p>
+
+        <span class="product-tag">
+          SOCIAL PLATFORM
+        </span>
       </div>
+
       <div class="product-card">
-        <div class="product-card-bg"></div>
-        <div class="product-icon">
-          <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="4" stroke="#0057FF" stroke-width="1.5"/><path d="M6 18h36M18 18v24" stroke="#0057FF" stroke-width="1.5"/></svg>
-        </div>
         <h3 class="product-name">OCloud</h3>
-        <p class="product-desc">Distributed cloud infrastructure built for AI workloads and hyper-scale applications.</p>
-        <span class="product-tag">Infrastructure</span>
+
+        <p class="product-desc">
+          Distributed infrastructure optimized for AI systems and scalable cloud applications.
+        </p>
+
+        <span class="product-tag">
+          CLOUD INFRASTRUCTURE
+        </span>
       </div>
+
       <div class="product-card">
-        <div class="product-card-bg"></div>
-        <div class="product-icon">
-          <svg viewBox="0 0 48 48" fill="none"><path d="M8 36L24 12L40 36" stroke="#FF4D1C" stroke-width="1.5"/><path d="M14 28h20" stroke="#FF4D1C" stroke-width="1.5"/></svg>
-        </div>
         <h3 class="product-name">Cypher AI</h3>
-        <p class="product-desc">AI models and APIs that power personalization, content moderation, and recommendation engines.</p>
-        <span class="product-tag">AI / ML</span>
+
+        <p class="product-desc">
+          Intelligent APIs powering recommendations, moderation, and next-gen automation.
+        </p>
+
+        <span class="product-tag">
+          ARTIFICIAL INTELLIGENCE
+        </span>
       </div>
+
       <div class="product-card">
-        <div class="product-card-bg"></div>
-        <div class="product-icon">
-          <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="16" width="40" height="24" rx="3" stroke="#0057FF" stroke-width="1.5"/><path d="M16 16V10a8 8 0 0116 0v6" stroke="#0057FF" stroke-width="1.5"/><circle cx="24" cy="28" r="3" fill="#0057FF" opacity="0.5"/></svg>
-        </div>
         <h3 class="product-name">Paycom</h3>
-        <p class="product-desc">Seamless, compliant payments infrastructure for creators, communities, and marketplaces.</p>
-        <span class="product-tag">Fintech</span>
+
+        <p class="product-desc">
+          Fast, secure, and borderless payment infrastructure for digital communities.
+        </p>
+
+        <span class="product-tag">
+          FINTECH
+        </span>
       </div>
+
     </div>
+
   </section>
 
-  <!-- Mission -->
-  <section class="mission" id="about">
-    <div class="mission-text">
-      <p class="section-label">Our Mission</p>
-      <h2 class="mission-quote">Technology should <em>empower</em> every human, not just the privileged few.</h2>
-      <p class="mission-body">We're building the infrastructure layer that powers the next era of human connection — open, fast, private, and built to last. We believe the best technology companies are relentlessly obsessed with their users, not their stock price.</p>
-      <p class="mission-body" style="margin-top:16px;">That means building with radical transparency, prioritizing developer tools, investing in communities, and making hard bets that take a decade to pay off.</p>
-    </div>
-    <div class="mission-visual">
-      <div class="mission-rings">
-        <div class="ring ring-1"></div>
-        <div class="ring ring-2"></div>
-        <div class="ring ring-3"></div>
-        <div class="ring-center"></div>
-      </div>
-    </div>
-  </section>
+  <!-- TEAM -->
 
-  <!-- Team -->
   <section class="section" id="team">
+
     <div class="section-header">
-      <div>
-        <p class="section-label">The Team</p>
-        <h2 class="section-title">Built by People<br/>Who've Done This Before</h2>
-      </div>
+      <p class="section-label">Leadership</p>
+
+      <h2 class="section-title">
+        Building The Future<br>
+        Together
+      </h2>
     </div>
+
     <div class="team-grid">
+
       <div class="team-card">
-        <div class="team-avatar" style="background:rgba(255,77,28,0.15); color:#FF4D1C;">YO</div>
-        <h3 class="team-name">Audu Wilfred (Founder)</h3>
-        <p class="team-role">CEO & Co-Founder</p>
-        <p class="team-bio">Visionary leader building the next-generation social and AI company. Sets company direction, recruits the best talent, and drives the mission forward.</p>
+
+        <div class="team-avatar">AW</div>
+
+        <h3 class="team-name">
+          Audu Wilfred
+        </h3>
+
+        <p class="team-role">
+          CEO & Founder
+        </p>
+
+        <p class="team-bio">
+          Leading ORIGIN’s long-term mission to build scalable social and AI infrastructure for billions of users worldwide.
+        </p>
+
       </div>
+
       <div class="team-card">
-        <div class="team-avatar" style="background:rgba(0,87,255,0.15); color:#0057FF;">CTO</div>
-        <h3 class="team-name">Joshua Vincent</h3>
-        <p class="team-role">CTO & Co-Founder</p>
-        <p class="team-bio">Leads all engineering, infrastructure, and product architecture. Needs deep experience in distributed systems and hyper-scale platforms.</p>
+
+        <div class="team-avatar">JV</div>
+
+        <h3 class="team-name">
+          Joshua Vincent
+        </h3>
+
+        <p class="team-role">
+          CTO
+        </p>
+
+        <p class="team-bio">
+          Oversees engineering systems, platform architecture, and distributed infrastructure development.
+        </p>
+
       </div>
+
       <div class="team-card">
-        <div class="team-avatar" style="background:rgba(244,242,238,0.1); color:var(--white);">CPO</div>
-        <h3 class="team-name">Caleb Vincent</h3>
-        <p class="team-role">Chief Product Officer</p>
-        <p class="team-bio">Defines user experience, product roadmap, and go-to-market strategy. Bridges business goals with engineering reality.</p>
+
+        <div class="team-avatar">CV</div>
+
+        <h3 class="team-name">
+          Caleb Vincent
+        </h3>
+
+        <p class="team-role">
+          Chief Product Officer
+        </p>
+
+        <p class="team-bio">
+          Leads product strategy, experience design, and platform innovation across ORIGIN products.
+        </p>
+
       </div>
+
     </div>
+
   </section>
 
   <!-- CTA -->
-  <div class="cta-banner" id="careers">
-    <div>
-      <p class="section-label">Join The Origin</p>
-      <h2 class="section-title" style="color:var(--black);">We're Hiring the<br/>Best in the World</h2>
-    </div>
-    <button class="btn-dark">View Open Roles →</button>
-  </div>
 
-  <!-- Footer -->
+  <section class="cta" id="careers">
+
+    <div class="cta-box">
+
+      <h2 class="cta-title">
+        We’re Hiring<br>
+        World-Class Talent
+      </h2>
+
+      <button class="btn-primary">
+        View Open Roles
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
   <footer>
+
     <div class="footer-top">
-      <div class="footer-brand">
-        <div class="logo" style="margin-bottom:20px;">
-          <div class="logo-mark"></div>
-          NexusCore
+
+      <div>
+
+        <div class="logo">
+          <img src="origin-logo.png" alt="ORIGIN Logo">
+          <span>ORIGIN</span>
         </div>
-        <p class="footer-desc">Building the next generation of social infrastructure for a billion connected humans.</p>
+
+        <p class="footer-desc">
+          Building the next generation of social infrastructure for a billion connected humans.
+        </p>
+
       </div>
+
       <div class="footer-col">
+
         <h4>Company</h4>
+
         <ul>
           <li><a href="#">About</a></li>
-          <li><a href="#">Blog</a></li>
           <li><a href="#">Careers</a></li>
           <li><a href="#">Press</a></li>
           <li><a href="#">Investors</a></li>
         </ul>
+
       </div>
+
       <div class="footer-col">
-        <h4>Products</h4>
-        <ul>
-          <li><a href="#">OChat</a></li>
-          <li><a href="#">OCloud</a></li>
-          <li><a href="#">Cypher AI</a></li>
-          <li><a href="#">Paycom</a></li>
-          <li><a href="#">Developer API</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
+
         <h4>Legal</h4>
+
         <ul>
           <li><a href="#">Privacy Policy</a></li>
           <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Cookie Policy</a></li>
           <li><a href="#">Security</a></li>
         </ul>
+
       </div>
+
     </div>
+
     <div class="footer-bottom">
-      <span>© 2026 The Origin, Inc. All rights reserved.</span>
-      <span>Delaware, USA · Built with desire and obsessive engineering</span>
+      <span>© 2026 ORIGIN. All rights reserved.</span>
+      <span>Built with obsessive engineering.</span>
     </div>
+
   </footer>
 
+  <!-- JAVASCRIPT -->
+
   <script>
-    // Custom cursor
-    const dot = document.getElementById('dot');
-    const ring = document.getElementById('ring');
-    let mouseX = 0, mouseY = 0;
-    let ringX = 0, ringY = 0;
 
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      dot.style.left = mouseX + 'px';
-      dot.style.top = mouseY + 'px';
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
     });
 
-    function animateRing() {
-      ringX += (mouseX - ringX) * 0.1;
-      ringY += (mouseY - ringY) * 0.1;
-      ring.style.left = ringX + 'px';
-      ring.style.top = ringY + 'px';
-      requestAnimationFrame(animateRing);
-    }
-    animateRing();
-
-    // Nav scroll
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-    });
-
-    // Cursor scale on links
-    document.querySelectorAll('a, button').forEach(el => {
-      el.addEventListener('mouseenter', () => { ring.style.transform = 'translate(-50%, -50%) scale(1.8)'; });
-      el.addEventListener('mouseleave', () => { ring.style.transform = 'translate(-50%, -50%) scale(1)'; });
-    });
-
-    // Intersection observer for animated numbers
-    const stats = document.querySelectorAll('.stat-num');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '0';
-          entry.target.style.transform = 'translateY(20px)';
-          entry.target.style.transition = 'all 0.6s ease';
-          setTimeout(() => {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }, 100);
-          observer.unobserve(entry.target);
-        }
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
       });
-    }, { threshold: 0.5 });
-    stats.forEach(s => observer.observe(s));
+    });
+
   </script>
+
 </body>
-        </html>
+  </html>

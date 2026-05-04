@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Origin — Connecting the Next Billion</title>
+  <meta name="description" content="the origin builds infrastructure and social technology for the next generation of human connection." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black: #020408;
+      --white: #F4F2EE;
+      --accent: #FF4D1C;
+      --accent2: #0057FF;
+      --mid: #1A1E2E;
+      --muted: #6B7280;
+      --border: rgba(244,242,238,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      position: fixed; top: 0; left: 0; z-index: 9999;
+      pointer-events: none; mix-blend-mode: difference;
+    }
+    .cursor-dot {
+      width: 8px; height: 8px; background: var(--white);
+      border-radius: 50%; position: absolute;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s;
+    }
+    .cursor-ring {
+      width: 40px; height: 40px; border: 1px solid var(--white);
+      border-radius: 50%; position: absolute;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease-out;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 24px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid transparent;
+      transition: all 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(2,4,8,0.85);
+      backdrop-filter: blur(20px);
+      border-color: var(--border);
+    }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 22px;
+      letter-spacing: -0.5px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .logo-mark {
+      width: 32px; height: 32px;
+      background: var(--accent);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      animation: spin-slow 12s linear infinite;
+    }
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: var(--white); text-decoration: none;
+      font-size: 14px; letter-spacing: 0.02em;
+      opacity: 0.65; transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    .nav-cta {
+      background: var(--white); color: var(--black);
+      padding: 10px 22px; font-size: 14px; font-weight: 400;
+      border: none; letter-spacing: 0.02em;
+      cursor: none; transition: all 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .nav-cta:hover { background: var(--accent); color: var(--white); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 48px 80px;
+      position: relative; overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 80px 80px;
+      animation: grid-fade 3s ease forwards;
+    }
+    @keyframes grid-fade { from { opacity: 0; } to { opacity: 1; } }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+    }
+    .orb-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255,77,28,0.25), transparent 70%);
+      top: -100px; right: -100px;
+      animation: orb-float 8s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(0,87,255,0.2), transparent 70%);
+      bottom: 100px; left: 10%;
+      animation: orb-float 10s ease-in-out infinite reverse;
+    }
+    @keyframes orb-float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-40px) scale(1.05); }
+    }
+
+    .hero-eyebrow {
+      font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 32px;
+      opacity: 0; animation: slide-up 0.8s 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(56px, 8vw, 128px);
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      max-width: 900px;
+      opacity: 0; animation: slide-up 0.8s 0.5s forwards;
+    }
+    .hero-title em {
+      font-style: normal;
+      -webkit-text-stroke: 1px var(--white);
+      color: transparent;
+    }
+
+    .hero-bottom {
+      display: flex; align-items: flex-end;
+      justify-content: space-between;
+      margin-top: 64px;
+      opacity: 0; animation: slide-up 0.8s 0.8s forwards;
+    }
+    .hero-sub {
+      font-size: 18px; line-height: 1.6; max-width: 420px;
+      opacity: 0.6;
+    }
+    .hero-actions { display: flex; gap: 16px; align-items: center; }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+      padding: 16px 36px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 15px;
+      border: none; letter-spacing: 0.02em;
+      cursor: none; transition: all 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .btn-primary::after {
+      content: ''; position: absolute;
+      inset: 0; background: rgba(255,255,255,0.1);
+      transform: translateX(-100%); transition: transform 0.3s;
+    }
+    .btn-primary:hover::after { transform: translateX(0); }
+    .btn-ghost {
+      background: transparent; color: var(--white);
+      padding: 16px 36px; font-family: 'Syne', sans-serif;
+      font-weight: 600; font-size: 15px;
+      border: 1px solid var(--border);
+      cursor: none; transition: all 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .btn-ghost:hover { border-color: var(--white); }
+
+    @keyframes slide-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* TICKER */
+    .ticker {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0; overflow: hidden;
+      background: var(--mid);
+    }
+    .ticker-inner {
+      display: flex; gap: 80px; width: max-content;
+      animation: ticker 30s linear infinite;
+    }
+    @keyframes ticker { to { transform: translateX(-50%); } }
+    .ticker-item {
+      font-family: 'Syne', sans-serif; font-size: 13px;
+      font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; white-space: nowrap;
+      opacity: 0.5;
+      display: flex; gap: 24px; align-items: center;
+    }
+    .ticker-item span { color: var(--accent); }
+
+    /* STATS */
+    .stats {
+      padding: 120px 48px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+    .stat {
+      background: var(--black);
+      padding: 48px 40px;
+    }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(40px, 5vw, 72px);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .stat-num .accent { color: var(--accent); }
+    .stat-label {
+      margin-top: 16px; font-size: 14px;
+      opacity: 0.5; letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* PRODUCTS */
+    .section { padding: 120px 48px; }
+    .section-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; margin-bottom: 80px;
+    }
+    .section-label {
+      font-size: 11px; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: clamp(36px, 4vw, 64px);
+      letter-spacing: -0.03em; line-height: 1;
+    }
+    .section-link {
+      color: var(--white); text-decoration: none;
+      font-size: 14px; opacity: 0.5;
+      display: flex; align-items: center; gap: 8px;
+      transition: opacity 0.2s;
+    }
+    .section-link:hover { opacity: 1; }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 2px;
+    }
+    .product-card {
+      background: var(--mid);
+      padding: 48px;
+      position: relative; overflow: hidden;
+      transition: background 0.3s;
+    }
+    .product-card:hover { background: #1e2438; }
+    .product-card.featured {
+      grid-row: 1 / 3;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      min-height: 500px;
+    }
+    .product-card-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,77,28,0.08), transparent 60%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .product-card:hover .product-card-bg { opacity: 1; }
+
+    .product-icon {
+      width: 48px; height: 48px; margin-bottom: 32px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .product-icon svg { width: 100%; height: 100%; }
+    .product-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 24px;
+      letter-spacing: -0.02em; margin-bottom: 12px;
+    }
+    .product-desc {
+      font-size: 15px; line-height: 1.65;
+      opacity: 0.55; max-width: 320px;
+    }
+    .product-tag {
+      display: inline-block; margin-top: 24px;
+      font-size: 11px; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent);
+      border: 1px solid rgba(255,77,28,0.3);
+      padding: 6px 14px;
+    }
+
+    /* ABOUT / MISSION */
+    .mission {
+      padding: 120px 48px;
+      background: var(--mid);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 120px; align-items: center;
+    }
+    .mission-text .section-label { margin-bottom: 24px; }
+    .mission-quote {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(28px, 3vw, 48px);
+      line-height: 1.15; letter-spacing: -0.02em;
+    }
+    .mission-quote em {
+      font-style: normal; color: var(--accent);
+    }
+    .mission-body {
+      margin-top: 40px; font-size: 16px;
+      line-height: 1.75; opacity: 0.6;
+    }
+    .mission-visual {
+      position: relative; aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mission-rings {
+      position: relative; width: 300px; height: 300px;
+    }
+    .ring {
+      position: absolute; border-radius: 50%;
+      border: 1px solid;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .ring-1 { width: 100%; height: 100%; border-color: rgba(255,77,28,0.3); animation: rotate 20s linear infinite; }
+    .ring-2 { width: 70%; height: 70%; border-color: rgba(0,87,255,0.3); animation: rotate 15s linear infinite reverse; }
+    .ring-3 { width: 40%; height: 40%; border-color: rgba(244,242,238,0.2); animation: rotate 10s linear infinite; }
+    .ring-center {
+      position: absolute; width: 16px; height: 16px;
+      background: var(--accent); border-radius: 50%;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+    }
+    @keyframes rotate { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+    /* TEAM */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .team-card {
+      background: var(--mid); padding: 40px;
+      transition: background 0.3s;
+    }
+    .team-card:hover { background: #1e2438; }
+    .team-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      margin-bottom: 24px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 20px;
+    }
+    .team-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 20px;
+      margin-bottom: 6px;
+    }
+    .team-role { font-size: 13px; opacity: 0.5; text-transform: uppercase; letter-spacing: 0.08em; }
+    .team-bio { margin-top: 20px; font-size: 14px; line-height: 1.65; opacity: 0.55; }
+
+    /* CTA BANNER */
+    .cta-banner {
+      padding: 120px 48px;
+      background: var(--accent);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center; gap: 80px;
+    }
+    .cta-banner .section-title { color: var(--black); }
+    .cta-banner .section-label { color: rgba(2,4,8,0.5); }
+    .btn-dark {
+      background: var(--black); color: var(--white);
+      padding: 18px 40px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 16px;
+      border: none; cursor: none;
+      transition: all 0.2s; white-space: nowrap;
+      letter-spacing: 0.02em;
+    }
+    .btn-dark:hover { background: var(--mid); }
+
+    /* FOOTER */
+    footer {
+      padding: 80px 48px 40px;
+      border-top: 1px solid var(--border);
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 80px; margin-bottom: 80px;
+    }
+    .footer-brand .logo { margin-bottom: 20px; }
+    .footer-desc { font-size: 14px; opacity: 0.45; line-height: 1.7; max-width: 280px; }
+    .footer-col h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 13px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 24px; opacity: 0.5;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col a {
+      color: var(--white); text-decoration: none;
+      font-size: 14px; opacity: 0.6; transition: opacity 0.2s;
+    }
+    .footer-col a:hover { opacity: 1; }
+    .footer-bottom {
+      display: flex; justify-content: space-between;
+      padding-top: 40px; border-top: 1px solid var(--border);
+      font-size: 13px; opacity: 0.35;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      nav { padding: 20px 24px; }
+      .hero { padding: 0 24px 60px; }
+      .hero-title { font-size: clamp(42px, 10vw, 80px); }
+      .hero-bottom { flex-direction: column; align-items: flex-start; gap: 40px; }
+      .stats { grid-template-columns: repeat(2, 1fr); padding: 80px 24px; }
+      .section { padding: 80px 24px; }
+      .products-grid { grid-template-columns: 1fr; }
+      .product-card.featured { grid-row: auto; min-height: 300px; }
+      .mission { grid-template-columns: 1fr; gap: 60px; padding: 80px 24px; }
+      .team-grid { grid-template-columns: 1fr; }
+      .cta-banner { grid-template-columns: 1fr; gap: 40px; padding: 80px 24px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cursor -->
+  <div class="cursor">
+    <div class="cursor-dot" id="dot"></div>
+    <div class="cursor-ring" id="ring"></div>
+  </div>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <div class="logo">
+      <div class="logo-mark"></div>
+      NexusCore
+    </div>
+    <ul class="nav-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#careers">Careers</a></li>
+      <li><a href="#investors">Investors</a></li>
+    </ul>
+    <button class="nav-cta">Join Waitlist</button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <p class="hero-eyebrow">Est. 2026 · Building the Future</p>
+    <h1 class="hero-title">Connecting the <em>Next</em> Billion Minds</h1>
+    <div class="hero-bottom">
+      <p class="hero-sub">The Origin builds social infrastructure and AI-native platforms that scale to every human on Earth — starting today.</p>
+      <div class="hero-actions">
+        <button class="btn-primary">Get Early Access</button>
+        <button class="btn-ghost">Read our Manifesto</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ticker -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <div class="ticker-item">Social Platform <span>●</span></div>
+      <div class="ticker-item">AI Infrastructure <span>●</span></div>
+      <div class="ticker-item">Cloud Services <span>●</span></div>
+      <div class="ticker-item">Developer Tools <span>●</span></div>
+      <div class="ticker-item">Global Scale <span>●</span></div>
+      <div class="ticker-item">1B+ Users Target <span>●</span></div>
+      <div class="ticker-item">Open Source Core <span>●</span></div>
+      <div class="ticker-item">Privacy First <span>●</span></div>
+      <!-- Duplicate for seamless loop -->
+      <div class="ticker-item">Social Platform <span>●</span></div>
+      <div class="ticker-item">AI Infrastructure <span>●</span></div>
+      <div class="ticker-item">Cloud Services <span>●</span></div>
+      <div class="ticker-item">Developer Tools <span>●</span></div>
+      <div class="ticker-item">Global Scale <span>●</span></div>
+      <div class="ticker-item">1B+ Users Target <span>●</span></div>
+      <div class="ticker-item">Open Source Core <span>●</span></div>
+      <div class="ticker-item">Privacy First <span>●</span></div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">1<span class="accent">B+</span></div>
+      <div class="stat-label">Users we're building for</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">&lt;20<span class="accent">ms</span></div>
+      <div class="stat-label">Target p99 latency</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">99<span class="accent">.99%</span></div>
+      <div class="stat-label">Uptime SLO target</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6<span class="accent">+</span></div>
+      <div class="stat-label">Global regions at launch</div>
+    </div>
+  </div>
+
+  <!-- Products -->
+  <section class="section" id="products">
+    <div class="section-header">
+      <div>
+        <p class="section-label">Our Products</p>
+        <h2 class="section-title">Built for Scale,<br/>Designed for People</h2>
+      </div>
+      <a href="#" class="section-link">View all products →</a>
+    </div>
+    <div class="products-grid">
+      <div class="product-card featured">
+        <div class="product-card-bg"></div>
+        <div class="product-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="20" stroke="#FF4D1C" stroke-width="1.5"/>
+            <circle cx="24" cy="24" r="8" fill="#FF4D1C" opacity="0.3"/>
+            <circle cx="24" cy="24" r="3" fill="#FF4D1C"/>
+            <line x1="24" y1="4" x2="24" y2="16" stroke="#FF4D1C" stroke-width="1.5"/>
+            <line x1="24" y1="32" x2="24" y2="44" stroke="#FF4D1C" stroke-width="1.5"/>
+            <line x1="4" y1="24" x2="16" y2="24" stroke="#FF4D1C" stroke-width="1.5"/>
+            <line x1="32" y1="24" x2="44" y2="24" stroke="#FF4D1C" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h3 class="product-name">O Chat</h3>
+        <p class="product-desc">The next-generation social platform built with AI at its core. Real-time feeds, end-to-end encrypted messaging, and communities — all running on distributed infrastructure that never sleeps.</p>
+        <span class="product-tag">Flagship · In Development</span>
+      </div>
+      <div class="product-card">
+        <div class="product-card-bg"></div>
+        <div class="product-icon">
+          <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="4" stroke="#0057FF" stroke-width="1.5"/><path d="M6 18h36M18 18v24" stroke="#0057FF" stroke-width="1.5"/></svg>
+        </div>
+        <h3 class="product-name
